@@ -1,5 +1,11 @@
 <?php
+
+require_once "../../includes/login/header.php";
+
 require_once "../../config/index.config.php";
+
+require_once "../../styles/login.styles.php";
+
 ?>
 
 <?php
@@ -35,5 +41,5 @@ if (isset($_POST["login"])) {
         <input type="password" name="password" id="password" required="required" />
     </div>
 
-    <button name="login" type="submit">login</button>
+    <button class="btn" name="login" type="submit">Login</button>
 </form>
