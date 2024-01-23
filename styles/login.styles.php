@@ -1,9 +1,4 @@
 <style>
-    body {
-        font-family: "Karla", sans-serif;
-        font-weight: 400;
-    }
-    
     .form-group {
         display: flex;
         flex-direction: column;
@@ -21,6 +16,9 @@
 
         border-radius: none;
         border: 1px solid #000000;
+
+        font-family: "Karla", sans-serif;
+        font-size: 12pt;
     }
 
     .btn {
@@ -35,5 +33,7 @@
         outline: none;
 
         cursor: pointer;
+
+        font-size: 11pt;
     }
 </style>
