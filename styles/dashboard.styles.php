@@ -3,7 +3,7 @@
         display: flex;
         flex-direction: column;
 
-        max-width: 15rem;
+        max-width: 25rem;
 
         margin-top: .5rem;
     }
@@ -12,5 +12,11 @@
         background: #fff;
         /* or any other */
         filter: none;
+    }
+
+    .form-group input,
+    .form-group textarea {
+        padding: .5rem;
+        margin-top: .25rem;
     }
 </style>

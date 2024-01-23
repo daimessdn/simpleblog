@@ -32,4 +32,20 @@ if ($conn == true) {
             ":my_password" => password_hash("123", PASSWORD_DEFAULT)
         ]);
     }
+
+    // buat table postingan
+    $posts_table_query = "CREATE TABLE IF NOT EXISTS posts(id INT NOT NULL AUTO_INCREMENT, title VARCHAR(200) NOT NULL, post TEXT NOT NULL, PRIMARY KEY (id));";
+    $posts_table = $conn->query($posts_table_query);
+
+    $check_posts_is_empty_query = "SELECT * FROM posts;";
+    $check_posts_is_empty = $conn->query($check_posts_is_empty_query);
+
+    if ($check_posts_is_empty->rowCount() <= 0) {
+        $insert_admin_query = "INSERT INTO posts (title, post) VALUES (:title, :post);";
+        $insert_admin = $conn->prepare($insert_admin_query);
+        $insert_admin->execute([
+            ":title" => "Hello, world!",
+            ":post" => "This is the first post.",
+        ]);
+    }
 }
