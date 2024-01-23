@@ -20,8 +20,6 @@ if ($conn == true) {
     $user_table_query = "CREATE TABLE IF NOT EXISTS user(id INT NOT NULL AUTO_INCREMENT, username VARCHAR(50) NOT NULL, password VARCHAR(100) NOT NULL, email VARCHAR(100) NOT NULL, PRIMARY KEY (id));";
     $user_table = $conn->query($user_table_query);
 
-    echo "sukses membuat table user</br />";
-
     $check_user_is_empty_query = "SELECT * FROM user;";
     $check_user_is_empty = $conn->query($check_user_is_empty_query);
 
