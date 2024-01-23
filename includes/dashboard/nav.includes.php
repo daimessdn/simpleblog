@@ -10,4 +10,8 @@
     <li>
         <a href="users.dashboard.php">Users</a>
     </li>
+
+    <li>
+        <a href="../auth/logout.php">Logout</a>
+    </li>
 </ul>

@@ -22,11 +22,16 @@ if ($conn == true) {
 
     echo "sukses membuat table user</br />";
 
-    $insert_admin_query = "INSERT INTO user (username, email, password) VALUES (:username, :email, :my_password);";
-    $insert_admin = $conn->prepare($insert_admin_query);
-    $insert_admin->execute([
-        ":username" => "admin",
-        ":email" => "admin@example.com",
-        ":my_password" => password_hash("123", PASSWORD_DEFAULT)
-    ]);
+    $check_user_is_empty_query = "SELECT * FROM user;";
+    $check_user_is_empty = $conn->query($check_user_is_empty_query);
+
+    if ($check_user_is_empty->rowCount() <= 0) {
+        $insert_admin_query = "INSERT INTO user (username, email, password) VALUES (:username, :email, :my_password);";
+        $insert_admin = $conn->prepare($insert_admin_query);
+        $insert_admin->execute([
+            ":username" => "admin",
+            ":email" => "admin@example.com",
+            ":my_password" => password_hash("123", PASSWORD_DEFAULT)
+        ]);
+    }
 }
