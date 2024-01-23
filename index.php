@@ -1,7 +1,7 @@
 <?php
 require_once("config/index.config.php");
 
-include_once("includes/blog/header.php");
+include_once("includes/blog/header.includes.php");
 
 ?>
 
@@ -22,4 +22,4 @@ include_once("includes/blog/header.php");
     <?php endforeach; ?>
 </main>
 
-<?php include_once("includes/blog/footer.php"); ?>
+<?php include_once("includes/blog/footer.includes.php"); ?>
