@@ -4,19 +4,36 @@
         flex-direction: column;
 
         max-width: 25rem;
-
-        margin-top: .5rem;
+        margin-bottom: 1rem;
     }
 
-    input:autofill {
-        background: #fff;
-        /* or any other */
-        filter: none;
+    .form-group label {
+        margin-bottom: .5rem;
     }
 
-    .form-group input,
-    .form-group textarea {
+    .form-group input, .form-group textarea {
         padding: .5rem;
-        margin-top: .25rem;
+
+        border-radius: none;
+        border: 1px solid #000000;
+
+        font-family: "Karla", sans-serif;
+        font-size: 12pt;
+    }
+
+    .btn {
+        padding: .5rem 1rem;
+        font-family: "Karla", sans-serif;
+
+        background-color: #000000;
+        color: #fff;
+
+        border-radius: none;
+        border: none;
+        outline: none;
+
+        cursor: pointer;
+
+        font-size: 11pt;
     }
 </style>

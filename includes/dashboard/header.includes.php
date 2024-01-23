@@ -10,6 +10,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,200..800;1,200..800&display=swap" rel="stylesheet">
 
     <style>
+        * {
+            box-sizing: border-box;
+        }
+
         a {
             text-decoration: none;
             color: #000;
@@ -21,15 +25,49 @@
 
             font-family: "Karla", sans-serif;
             font-weight: 400;
+
+            margin: 0;
+
+            display: flex;
+            flex-direction: row;
         }
 
-        header, main, footer {
-            max-width: 1280px;
-            margin: auto;
+        nav {
+            display: flex;
+            flex-direction: column;
+
+            width: 20%;
+            height: 100svh;
+
+            background-color: #000000;
+            color: #fff;
+        }
+
+        nav ul {
+            padding: 0;
+            margin: 0;
+
+            list-style: none;
+            
+            display: flex;
+            flex-direction: column;
+        }
+
+        nav ul li a  {
+            padding: .5rem;
+            display: block;
+            background-color: #000000;
+            color: #ffffff;
+        }
+
+        main {
+            padding: .5rem;
+            margin: 0;
+        }
+
+        p {
+            margin-top: 0;
         }
     </style>
 </head>
 <body>
-    <header>
-        <a href="../../index.php"><h1>simpleblog</h1></a>
-    </header>
