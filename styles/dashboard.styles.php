@@ -44,7 +44,7 @@
     }
 
     .btn-secondary {
-        background-color: #902923;
+        background-color: #ce4257;
     }
 
     table {

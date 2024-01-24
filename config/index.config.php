@@ -155,7 +155,8 @@ class Model
         return sizeof($data) == 0;
     }
 
-    public function update($params, $update_params, $limit = -1, $offset = -1) {
+    public function update($params, $update_params, $limit = -1, $offset = -1)
+    {
         $table = $this->table;
 
         $where = " WHERE ";
@@ -196,21 +197,53 @@ class Model
 
         return $this->fetch($query);
     }
+
+    public function delete($params = [], $limit = -1, $offset = -1)
+    {
+        $table = $this->table;
+
+        $limit = $limit > 0 ? " LIMIT $limit" : "";
+        $offset = $offset > 0 ? " OFFSET $offset" : "";
+
+        $keys_assoc = array_keys($params);
+        $keys_size = sizeof($keys_assoc);
+
+        $where = " WHERE ";
+
+        for ($i = 0; $i < $keys_size; $i++) {
+            $key = $keys_assoc[$i];
+            $val = $params[$keys_assoc[$i]];
+
+            $where .= $key . " = " . (is_string($val) ? $this->to_str($val) : $val);
+
+            if ($i != ($keys_size - 1)) {
+                $where .= " AND ";
+            }
+        }
+
+        $query = "DELETE FROM " . $table . $where . $limit . $offset . ";";
+
+        return $this->fetch($query);
+    }
 }
 
 class UserModel extends Model
 {
-    public function verify_password($username, $password) {
-        $hashed_password = $this->select_all([
-            "username" => $username]
+    public function verify_password($username, $password)
+    {
+        $hashed_password = $this->select_all(
+            [
+                "username" => $username
+            ]
         )[0]["password"];
 
         return password_verify($password, $hashed_password);
     }
 
-    public function check_user_exists($username) {
+    public function check_user_exists($username)
+    {
         $users = $this->select_all([
-            "username"=> $username,
+            "username" => $username,
         ]);
 
         return sizeof($users) > 0;

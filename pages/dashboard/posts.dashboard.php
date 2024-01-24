@@ -82,9 +82,13 @@ if (!isset($_SESSION["token"])) {
                         <?= $posts["post"] ?>
                     </td>
                     
-                    <td>
+                    <td style="display: flex; gap: .5rem;">
                         <a href="posts.update.dashboard.php?id=<?= $posts['id'] ?>" class="btn">
                             Edit
+                        </a>
+
+                        <a href="posts.delete.dashboard.php?id=<?= $posts['id'] ?>" class="btn btn-secondary">
+                            Hapus
                         </a>
                     </td>
                 </tr>
