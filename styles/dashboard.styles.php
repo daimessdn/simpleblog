@@ -17,13 +17,13 @@
         border-radius: none;
         border: 1px solid #000000;
 
-        font-family: "Raleway", sans-serif;
+        font-family: "Helvetica Neue", sans-serif;
         font-size: 12pt;
     }
 
     .btn {
         padding: .5rem 1rem;
-        font-family: "Raleway", sans-serif;
+        font-family: "Helvetica Neue", sans-serif;
 
         background-color: #000000;
         color: #F6F7EB;
