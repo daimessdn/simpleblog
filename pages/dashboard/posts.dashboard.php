@@ -23,9 +23,24 @@ if (!isset($_SESSION["token"])) {
             "title" => $title,
             "category" => $category,
             "post" => $body,
+            "status" => 1,
+            "published_at" => date("Y-m-d H:i:s"),
         ]);
 
         echo "sukses tambah postingan <strong>$title</strong>";
+    } else if (isset($_POST["add_draft"])) {
+        $title = $_POST["title"];
+        $category = $_POST["category"];
+        $body = $_POST["content"];
+
+        $post->insert([
+            "title" => $title,
+            "category" => $category,
+            "post" => $body,
+            "status" => 0,
+        ]);
+
+        echo "postingan <strong>$title</strong> disimpan sebagai draft";
     }
     ?>
 
@@ -36,6 +51,7 @@ if (!isset($_SESSION["token"])) {
             <tr>
                 <th></th>
                 <th>Judul</th>
+                <th></th>
                 <!-- <th>Kategori</th> -->
                 <th>Isi postingan</th>
             </tr>
@@ -54,6 +70,9 @@ if (!isset($_SESSION["token"])) {
                     </td>
                     <td>
                         <?= $posts["title"] ?>
+                    </td>
+                    <td>
+                        <?= $posts["status"] == 0 ? "<em>Draft</em>" : "" ?>
                     </td>
                     <!-- <td>
                         <?= $posts["category"] ?>
@@ -94,5 +113,6 @@ if (!isset($_SESSION["token"])) {
         </div>
 
         <button class="btn" name="add_posts" type="submit">Tulis postingan</button>
+        <button class="btn btn-secondary" name="add_draft" type="submit">Simpan sebagai draft</button>
     </form>
 </main>

@@ -6,17 +6,13 @@ include_once("includes/blog/header.includes.php");
 ?>
 
 <?php
-    function show_posts($conn) {
-        $posts = $conn->query("SELECT * FROM posts;");
-
-        return $posts->fetchAll(PDO::FETCH_ASSOC);
-    }
+    $show_posts = $post->select_all(["status" => 1]);
 ?>
 
 <main>
-    <?php foreach (show_posts($conn) as $post) : ?>
-        <h1><?= $post["title"]; ?></h1>
-        <p><?= $post["post"]; ?></p>
+    <?php foreach ($show_posts as $posts) : ?>
+        <h1><?= $posts["title"]; ?></h1>
+        <p><?= $posts["post"]; ?></p>
 
         <hr />
     <?php endforeach; ?>

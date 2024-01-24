@@ -43,6 +43,10 @@
         font-size: 11pt;
     }
 
+    .btn-secondary {
+        background-color: #902923;
+    }
+
     table {
         margin: 1rem 0;
         border-collapse: collapse;
