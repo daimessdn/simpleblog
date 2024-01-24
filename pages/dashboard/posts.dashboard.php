@@ -28,6 +28,8 @@ if (!isset($_SESSION["token"])) {
         echo "sukses tambah postingan <strong>$title</strong>";
     }
     ?>
+    
+    <h1>Postingan</h1>
 
     <table>
         <thead>

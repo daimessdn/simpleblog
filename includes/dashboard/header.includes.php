@@ -69,6 +69,7 @@
             min-width: 60%;
             
             margin: 0 auto;
+            padding-top: 1rem;
         }
 
         p {

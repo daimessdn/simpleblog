@@ -1,4 +1,8 @@
 <style>
+    h1, h2, h3, h4, h5, h6, p {
+        margin-top: 0;
+    }
+
     .form-group {
         display: flex;
         flex-direction: column;
@@ -11,7 +15,7 @@
         margin-bottom: .5rem;
     }
 
-    .form-group input, .form-group textarea {
+    .form-group input, .form-group textarea, .form-group select {
         padding: .5rem;
 
         border-radius: none;
@@ -19,6 +23,8 @@
 
         font-family: "Helvetica Neue", sans-serif;
         font-size: 12pt;
+
+        background-color: #F6F7EB;
     }
 
     .btn {
@@ -38,7 +44,7 @@
     }
 
     table {
-        margin-top: 1rem;
+        margin: 1rem 0;
         border-collapse: collapse;
         width: 100%;
 

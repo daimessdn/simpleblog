@@ -14,5 +14,5 @@ if (!isset($_SESSION["token"])) {
 ?>
 
 <main>
-    <p>ini home</p>
+    <h1>Selamat datang!</h1>
 </main>

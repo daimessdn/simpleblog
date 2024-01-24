@@ -13,7 +13,7 @@ if (isset($_POST["login"])) {
     $username = $_POST["username"];
     $password = $_POST["password"];
 
-    $check_user_exists_query = "SELECT * FROM user WHERE username = \"" . $username . "\";";
+    $check_user_exists_query = "SELECT * FROM users WHERE username = \"" . $username . "\";";
     $check_user_exists = $conn->query($check_user_exists_query);
 
     if ($check_user_exists->rowCount() > 0) {
