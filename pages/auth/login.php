@@ -23,6 +23,7 @@ if (isset($_POST["login"])) {
 
             $_SESSION["token"] = hash("md5", $username);
             $_SESSION["profile"] = [
+                "id" => $profile["id"],
                 "name" => $profile["name"],
                 "email" => $profile["email"],
                 "username" => $profile["username"],

@@ -248,6 +248,11 @@ class UserModel extends Model
 
         return sizeof($users) > 0;
     }
+
+    public function is_administrator($id) {
+        $user = $this->select_all(["id" => $id])[0];
+        return $user["role"] == 1;
+    }
 }
 
 class PostModel extends Model
