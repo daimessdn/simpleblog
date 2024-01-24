@@ -75,6 +75,12 @@
 
     table tr th, table tr td {
         padding: .5rem;
+
+        line-height: 1.5rem;
+    }
+
+    table tr th a, table tr td a {
+        display: block;
     }
 
     table tr th:first-child, table tr td:first-child {

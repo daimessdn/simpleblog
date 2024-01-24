@@ -54,6 +54,7 @@ if (!isset($_SESSION["token"])) {
                 <th></th>
                 <!-- <th>Kategori</th> -->
                 <th>Isi postingan</th>
+                <th></th>
             </tr>
         </thead>
 
@@ -79,6 +80,12 @@ if (!isset($_SESSION["token"])) {
                     </td> -->
                     <td>
                         <?= $posts["post"] ?>
+                    </td>
+                    
+                    <td>
+                        <a href="posts.update.dashboard.php?id=<?= $posts['id'] ?>" class="btn">
+                            Edit
+                        </a>
                     </td>
                 </tr>
             <?php endforeach; ?>

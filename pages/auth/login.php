@@ -19,7 +19,14 @@ if (isset($_POST["login"])) {
         $is_password_match = $user->verify_password($username, $password);
 
         if ($is_password_match) {
+            $profile = $user->select_all(["username" => $username])[0];
+
             $_SESSION["token"] = hash("md5", $username);
+            $_SESSION["profile"] = [
+                "name" => $profile["name"],
+                "email" => $profile["email"],
+                "username" => $profile["username"],
+            ];
     
             header("location:../dashboard/home.dashboard.php");
         }

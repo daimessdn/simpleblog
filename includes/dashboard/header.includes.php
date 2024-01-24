@@ -30,6 +30,8 @@
 
             display: flex;
             flex-direction: row;
+
+            line-height: 1.5rem;
         }
 
         nav {
@@ -67,6 +69,7 @@
 
         main {
             min-width: 60%;
+            max-width: 60%;
             
             margin: 0 auto;
             padding-top: 1rem;

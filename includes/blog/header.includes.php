@@ -25,7 +25,7 @@
             font-family: "Helvetica Neue", sans-serif;
             font-weight: 400;
         }
-
+        
         header, main, footer {
             max-width: 1280px;
             margin: auto;
@@ -34,7 +34,7 @@
         nav {
             display: flex;
             flex-direction: column;
-
+            
             background-color: #000000;
             color: #fff;
         }
@@ -48,7 +48,7 @@
             display: flex;
             flex-direction: column;
         }
-
+        
         nav ul li a  {
             padding: 1rem;
             display: block;
@@ -59,6 +59,10 @@
         nav ul li a.active  {
             color: #000000;
             background-color: #ffffff;
+        }
+
+        p {
+            line-height: 1.5rem;
         }
     </style>
 </head>

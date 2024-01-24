@@ -154,6 +154,48 @@ class Model
 
         return sizeof($data) == 0;
     }
+
+    public function update($params, $update_params, $limit = -1, $offset = -1) {
+        $table = $this->table;
+
+        $where = " WHERE ";
+        $limit = $limit > 0 ? " LIMIT $limit" : "";
+        $offset = $offset > 0 ? " OFFSET $offset" : "";
+
+        $keys_assoc = array_keys($params);
+        $keys_size = sizeof($keys_assoc);
+
+        for ($i = 0; $i < $keys_size; $i++) {
+            $key = $keys_assoc[$i];
+            $val = $params[$keys_assoc[$i]];
+
+            $where .= $key . " = " . (is_string($val) ? $this->to_str($val) : $val);
+
+            if ($i != ($keys_size - 1)) {
+                $where .= " AND ";
+            }
+        }
+
+        $set = "";
+
+        $update_keys_assoc = array_keys($update_params);
+        $update_keys_size = sizeof($update_keys_assoc);
+
+        for ($i = 0; $i < $update_keys_size; $i++) {
+            $update_key = $update_keys_assoc[$i];
+            $update_val = $update_params[$update_keys_assoc[$i]];
+
+            $set .= $update_key . " = " . (is_string($update_val) ? $this->to_str($update_val) : $update_val);
+
+            if ($i != ($update_keys_size - 1)) {
+                $set .= ", ";
+            }
+        }
+
+        $query = "UPDATE " . $table . " SET " . $set . $where . $limit . $offset . ";";
+
+        return $this->fetch($query);
+    }
 }
 
 class UserModel extends Model
