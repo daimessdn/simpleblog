@@ -29,14 +29,13 @@ if (!isset($_SESSION["token"])) {
     }
     ?>
 
-    <p>ini post</p>
-
     <table>
         <thead>
             <tr>
                 <th></th>
                 <th>Judul</th>
                 <th>Isi postingan</th>
+            </tr>
         </thead>
 
         <tbody>

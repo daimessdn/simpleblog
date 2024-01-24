@@ -7,7 +7,7 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,200..800;1,200..800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,200..800;1,200..800&display=swap" rel="stylesheet">
 
     <style>
         * {
@@ -23,7 +23,7 @@
             width: 100%;
             height: 100%;
 
-            font-family: "Karla", sans-serif;
+            font-family: "Raleway", sans-serif;
             font-weight: 400;
 
             margin: 0;
@@ -54,15 +54,21 @@
         }
 
         nav ul li a  {
-            padding: .5rem;
+            padding: 1rem;
             display: block;
             background-color: #000000;
             color: #ffffff;
         }
 
+        nav ul li a.active  {
+            color: #000000;
+            background-color: #ffffff;
+        }
+
         main {
-            padding: .5rem;
-            margin: 0;
+            min-width: 60%;
+            
+            margin: 0 auto;
         }
 
         p {

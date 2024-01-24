@@ -27,8 +27,6 @@ if (!isset($_SESSION["token"])) {
     }
     ?>
 
-    <p>ini halaman user</p>
-
     <table>
         <thead>
             <tr>
