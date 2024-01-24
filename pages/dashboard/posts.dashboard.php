@@ -16,19 +16,19 @@ if (!isset($_SESSION["token"])) {
     <?php
     if (isset($_POST["add_posts"])) {
         $title = $_POST["title"];
-        $post = $_POST["content"];
+        $category = $_POST["category"];
+        $body = $_POST["content"];
 
-        $add_posts_query = "INSERT INTO posts (title, post) VALUES (:title, :post);";
-        $add_posts = $conn->prepare($add_posts_query);
-
-        $add_posts->execute([
-            ":title" => $title,
-            ":post" => $post,
+        $post->insert([
+            "title" => $title,
+            "category" => $category,
+            "post" => $body,
         ]);
+
         echo "sukses tambah postingan <strong>$title</strong>";
     }
     ?>
-    
+
     <h1>Postingan</h1>
 
     <table>
@@ -36,6 +36,7 @@ if (!isset($_SESSION["token"])) {
             <tr>
                 <th></th>
                 <th>Judul</th>
+                <!-- <th>Kategori</th> -->
                 <th>Isi postingan</th>
             </tr>
         </thead>
@@ -43,15 +44,23 @@ if (!isset($_SESSION["token"])) {
         <tbody>
             <?php
             // view posts
-            $view_posts_query = "SELECT * FROM posts;";
-            $view_posts = $conn->query($view_posts_query);
+            $view_posts = $post->select_all();
 
-            foreach ($view_posts->fetchAll(PDO::FETCH_ASSOC) as $posts) :
-            ?>
+            foreach ($view_posts as $posts):
+                ?>
                 <tr>
-                    <td><?= $posts["id"] ?></td>
-                    <td><?= $posts["title"] ?></td>
-                    <td><?= $posts["post"] ?></td>
+                    <td>
+                        <?= $posts["id"] ?>
+                    </td>
+                    <td>
+                        <?= $posts["title"] ?>
+                    </td>
+                    <!-- <td>
+                        <?= $posts["category"] ?>
+                    </td> -->
+                    <td>
+                        <?= $posts["post"] ?>
+                    </td>
                 </tr>
             <?php endforeach; ?>
         </tbody>
@@ -61,12 +70,27 @@ if (!isset($_SESSION["token"])) {
         <h2>Tulis blog</h2>
         <div class="form-group">
             <label for="title">Judul Postingan</label>
-            <input type="text" autocomplete="off" name="title" id="title" placeholder="Masukan judul postingan" required="required" />
+            <input type="text" autocomplete="off" name="title" id="title" placeholder="Masukan judul postingan"
+                required="required" />
+        </div>
+
+        <div class="form-group">
+            <label for="category">Kategori</label>
+            <select autocomplete="off" name="category" id="category" placeholder="Pilih kategori"
+                required="required">
+                <option value="">Pilih kategori</option>
+                <option value="0">Belum ada kategori</option>
+                <option value="1">Artikel</option>
+                <option value="2">Blog</option>
+                <option value="3">Berita</option>
+                <option value="4">Portfolio</option>
+            </select>
         </div>
 
         <div class="form-group">
             <label for="content">Isi</label>
-            <textarea autocomplete="off" name="content" id="content" placeholder="Tulis blog disini" required="required" rows="5"></textarea>
+            <textarea rows="5" autocomplete="off" name="content" id="content" placeholder="Tulis blog disini"
+                required="required"></textarea>
         </div>
 
         <button class="btn" name="add_posts" type="submit">Tulis postingan</button>

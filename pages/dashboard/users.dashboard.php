@@ -18,19 +18,17 @@ if (!isset($_SESSION["token"])) {
         $name = $_POST["name"];
         $username = $_POST["username"];
         $email = $_POST["email"];
-        $password = password_hash($_POST["password"], PASSWORD_DEFAULT);
+        $password = $_POST["password"];
         $role = $_POST["role"];
 
-        $add_user_query = "INSERT INTO users (name, username, email, password, role) VALUES (:name, :username, :email, :password, :role);";
-        $add_user = $conn->prepare($add_user_query);
-
-        $add_user->execute([
-            ":name" => $name,
-            ":username" => $username,
-            ":email" => $email,
-            ":password" => $password,
-            ":role" => $role,
+        $user->insert([
+            'name' => $name,
+            'role' => $role,
+            'username' => $username,
+            'email' => $email,
+            'password' => $password,
         ]);
+
         echo "sukses tambah user $username";
     }
     ?>
@@ -50,16 +48,23 @@ if (!isset($_SESSION["token"])) {
         <tbody>
             <?php
             // view user
-            $view_user_query = "SELECT * FROM users;";
-            $view_user = $conn->query($view_user_query);
+            $view_users = $user->select_all();
 
-            foreach ($view_user->fetchAll(PDO::FETCH_ASSOC) as $user) :
-            ?>
+            foreach ($view_users as $user):
+                ?>
                 <tr>
-                    <td><?= $user["id"] ?></td>
-                    <td><?= $user["name"] ?></td>
-                    <td><?= $user["username"] ?></td>
-                    <td><?= $user["email"] ?></td>
+                    <td>
+                        <?= $user["id"] ?>
+                    </td>
+                    <td>
+                        <?= $user["name"] ?>
+                    </td>
+                    <td>
+                        <?= $user["username"] ?>
+                    </td>
+                    <td>
+                        <?= $user["email"] ?>
+                    </td>
                 </tr>
             <?php endforeach; ?>
         </tbody>
@@ -69,12 +74,14 @@ if (!isset($_SESSION["token"])) {
         <h2>Tambah user</h2>
         <div class="form-group">
             <label for="name">Nama</label>
-            <input type="text" autocomplete="off" name="name" id="name" placeholder="Masukan name" required="required" />
+            <input type="text" autocomplete="off" name="name" id="name" placeholder="Masukan name"
+                required="required" />
         </div>
 
         <div class="form-group">
             <label for="usename">Username</label>
-            <input type="text" autocomplete="off" name="username" id="username" placeholder="Masukan username" required="required" />
+            <input type="text" autocomplete="off" name="username" id="username" placeholder="Masukan username"
+                required="required" />
         </div>
 
         <div class="form-group">
@@ -88,17 +95,20 @@ if (!isset($_SESSION["token"])) {
 
         <div class="form-group">
             <label for="email">Email</label>
-            <input type="email" autocomplete="off" name="email" id="email" placeholder="Masukan alamat email" required="required" />
+            <input type="email" autocomplete="off" name="email" id="email" placeholder="Masukan alamat email"
+                required="required" />
         </div>
 
         <div class="form-group">
             <label for="password">Password</label>
-            <input type="password" autocomplete="off" name="password" id="password" placeholder="Masukan password" required="required" />
+            <input type="password" autocomplete="off" name="password" id="password" placeholder="Masukan password"
+                required="required" />
         </div>
 
         <div class="form-group">
             <label for="password_confirm">Konfirmasi</label>
-            <input type="password" autocomplete="off" name="password_confirm" id="password_confirm" placeholder="Masukan konfirmasi password" required="required" />
+            <input type="password" autocomplete="off" name="password_confirm" id="password_confirm"
+                placeholder="Masukan konfirmasi password" required="required" />
         </div>
 
         <button class="btn" name="add_user" type="submit">Tambah user</button>
