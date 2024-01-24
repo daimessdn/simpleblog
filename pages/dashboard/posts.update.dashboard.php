@@ -31,6 +31,7 @@ if (!isset($_SESSION["token"])) {
             "category" => $category,
             "post" => $body,
             "status" => 1,
+            "published_at" => $posts["status"] == 0 ? date("Y-m-d H:i:s") : null,
             "updated_at" => date("Y-m-d H:i:s"),
         ]);
 
@@ -88,7 +89,7 @@ if (!isset($_SESSION["token"])) {
                 required="required"><?= $posts["post"] ?></textarea>
         </div>
 
-        <button class="btn" name="update_post" type="submit">Update postingan</button>
+        <button class="btn" name="update_post" type="submit">Update dan publish</button>
         <button class="btn btn-secondary" name="update_draft" type="submit">Simpan sebagai draft</button>
     </form>
 </main>
