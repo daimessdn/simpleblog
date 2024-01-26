@@ -11,7 +11,8 @@ if (!isset($_SESSION["token"])) {
     header("location:../auth/login.php");
 }
 ?>
-<main>
+<main class="w-100 pt-2">
+    <div class="container mx-auto">
     <?php
     // get post based on id
     if (isset($_GET["id"])) {
@@ -29,4 +30,5 @@ if (!isset($_SESSION["token"])) {
         }
     }
     ?>
+    </div>
 </main>

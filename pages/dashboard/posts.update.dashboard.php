@@ -10,7 +10,8 @@ require_once("../../includes/dashboard/nav.includes.php");
 if (!isset($_SESSION["token"])) {
     header("location:../auth/login.php");
 }?>
-<main>
+<main class="w-100 pt-2">
+    <div class="container mx-auto">
     <?php
     // get post based on id
     if (isset($_GET["id"])) {
@@ -58,14 +59,14 @@ if (!isset($_SESSION["token"])) {
     <form action="<?= $update_url; ?>" method="post" autocomplete="off">
         <h2>Edit Blog</h2>
         <div class="form-group">
-            <label for="title">Judul Postingan</label>
-            <input type="text" autocomplete="off" name="title" id="title" placeholder="Masukan judul postingan" value="<?= $posts["title"]; ?>"
+            <label class="form-label"  for="title">Judul Postingan</label>
+            <input class="form-control" type="text" autocomplete="off" name="title" id="title" placeholder="Masukan judul postingan" value="<?= $posts["title"]; ?>"
                 required="required" />
         </div>
 
         <div class="form-group">
-            <label for="category">Kategori</label>
-            <select autocomplete="off" name="category" id="category" placeholder="Pilih kategori" ="<?= $posts["category"]; ?>"
+            <label class="form-label"  for="category">Kategori</label>
+            <select class="form-control" autocomplete="off" name="category" id="category" placeholder="Pilih kategori" ="<?= $posts["category"]; ?>"
                 required="required">
                 <option value="">Pilih kategori</option>
 
@@ -81,12 +82,13 @@ if (!isset($_SESSION["token"])) {
         </div>
 
         <div class="form-group">
-            <label for="content">Isi</label>
-            <textarea rows="5" autocomplete="off" name="content" id="content" placeholder="Tulis blog disini"
+            <label class="form-label"  for="content">Isi</label>
+            <textarea class="form-control" rows="5" autocomplete="off" name="content" id="content" placeholder="Tulis blog disini"
                 required="required"><?= $posts["post"] ?></textarea>
         </div>
 
-        <button class="btn" name="update_post" type="submit">Update dan publish</button>
-        <button class="btn btn-secondary" name="update_draft" type="submit">Simpan sebagai draft</button>
+        <button class="btn btn-primary" name="update_post" type="submit">Update dan publish</button>
+        <button class="btn btn-outline-primary" name="update_draft" type="submit">Simpan sebagai draft</button>
     </form>
+    </div>
 </main>

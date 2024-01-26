@@ -12,10 +12,12 @@ if (!isset($_SESSION["token"])) {
 }
 
 ?>
-<main>
+<main class="w-100 pt-2">
+    <div class="container mx-auto">
     <h1>Selamat datang!</h1>
 
     <p><?php echo $_SESSION["profile"]["name"]; ?></p>
     <p><?php echo $_SESSION["profile"]["username"]; ?></p>
     <p><?php echo $_SESSION["profile"]["email"]; ?></p>
+    </div>
 </main>

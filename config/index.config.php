@@ -121,8 +121,8 @@ class Model
         $table = $this->table;
 
         $where = "";
-        $limit = $limit > 0 ? " LIMIT $limit" : "";
-        $offset = $offset > 0 ? " OFFSET $offset" : "";
+        $limit = $limit >= 0 ? " LIMIT $limit" : "";
+        $offset = $offset >= 0 ? " OFFSET $offset" : "";
 
         $keys_assoc = array_keys($params);
         $keys_size = sizeof($keys_assoc);
@@ -147,6 +147,39 @@ class Model
         return $this->fetch($query);
     }
 
+    public function count_all($params = [], $limit = -1, $offset = -1)
+    {
+        $table = $this->table;
+
+        $where = "";
+        $limit = $limit >= 0 ? " LIMIT $limit" : "";
+        $offset = $offset >= 0 ? " OFFSET $offset" : "";
+
+        $keys_assoc = array_keys($params);
+        $keys_size = sizeof($keys_assoc);
+
+        if ($keys_size > 0) {
+            $where = " WHERE ";
+
+            for ($i = 0; $i < $keys_size; $i++) {
+                $key = $keys_assoc[$i];
+                $val = $params[$keys_assoc[$i]];
+
+                $where .= $key . "=" . (is_string($val) ? $this->to_str($val) : $val);
+
+                if ($i != ($keys_size - 1)) {
+                    $where .= " AND ";
+                }
+            }
+        }
+
+        $query = "SELECT COUNT(*) as count FROM " . $table . $where . $limit . $offset . ";";
+
+        echo $query;
+
+        return $this->fetch($query)[0]["count"];
+    }
+
     public function check_is_empty($params = [], $limit = -1, $offset = -1)
     {
         $data = $this->select_all($params = [], $limit = -1, $offset = -1);
@@ -159,8 +192,8 @@ class Model
         $table = $this->table;
 
         $where = " WHERE ";
-        $limit = $limit > 0 ? " LIMIT $limit" : "";
-        $offset = $offset > 0 ? " OFFSET $offset" : "";
+        $limit = $limit >= 0 ? " LIMIT $limit" : "";
+        $offset = $offset >= 0 ? " OFFSET $offset" : "";
 
         $keys_assoc = array_keys($params);
         $keys_size = sizeof($keys_assoc);
@@ -201,8 +234,8 @@ class Model
     {
         $table = $this->table;
 
-        $limit = $limit > 0 ? " LIMIT $limit" : "";
-        $offset = $offset > 0 ? " OFFSET $offset" : "";
+        $limit = $limit >= 0 ? " LIMIT $limit" : "";
+        $offset = $offset >= 0 ? " OFFSET $offset" : "";
 
         $keys_assoc = array_keys($params);
         $keys_size = sizeof($keys_assoc);

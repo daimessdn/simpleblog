@@ -1,14 +1,17 @@
 <?php
+require_once "../../config/index.config.php";
 
 require_once "../../includes/login/header.includes.php";
-
-require_once "../../config/index.config.php";
 
 require_once "../../styles/login.styles.php";
 
 ?>
 
 <?php
+if (isset($_SESSION["token"])) {
+    header("location:../dashboard/home.dashboard.php");
+}
+
 if (isset($_POST["login"])) {
     $username = $_POST["username"];
     $password = $_POST["password"];
@@ -28,7 +31,7 @@ if (isset($_POST["login"])) {
                 "email" => $profile["email"],
                 "username" => $profile["username"],
             ];
-    
+
             header("location:../dashboard/home.dashboard.php");
         }
     } else {
@@ -37,30 +40,21 @@ if (isset($_POST["login"])) {
 }
 ?>
 
-<main>
-    <form autocomplete="off" action="login.php" method="post">
-        <div class="form-group">
-            <label for="username">Username</label>
-            <input
-                type="text"
-                name="username"
-                id="username"
-                required="required"
-                placeholder="Masukan username"
-            />
-        </div>
+<main class="w-100 pt-2">
+    <div class="container mx-auto">
+        <form autocomplete="off" action="login.php" method="post">
+            <div class="form-group">
+                <label class="form-label" for="username">Username</label>
+                <input type="text" name="username" id="username" required="required" placeholder="Masukan username" />
+            </div>
 
-        <div class="form-group">
-            <label for="password">Password</label>
-            <input
-                type="password"
-                name="password"
-                id="password"
-                required="required"
-                placeholder="Masukan password"
-            />
-        </div>
+            <div class="form-group">
+                <label class="form-label" for="password">Password</label>
+                <input type="password" name="password" id="password" required="required"
+                    placeholder="Masukan password" />
+            </div>
 
-        <button class="btn" name="login" type="submit">Login</button>
-    </form>
+            <button class="btn btn-primary" name="login" type="submit">Login</button>
+        </form>
+    </div>
 </main>

@@ -12,7 +12,8 @@ if (!isset($_SESSION["token"])) {
 }
 ?>
 
-<main>
+<main class="w-100 pt-2">
+    <div class="container mx-auto">
     <?php
     // get post based on id
     if (isset($_GET["id"])) {
@@ -42,11 +43,12 @@ if (!isset($_SESSION["token"])) {
     <form action="<?= $update_url; ?>" method="post" autocomplete="off">
         <h2>Edit Kategori</h2>
         <div class="form-group">
-            <label for="name">Nama Kategoori</label>
-            <input type="text" autocomplete="off" name="name" id="name" placeholder="Masukan nama kategoori" value="<?= $categories["name"]; ?>"
+            <label class="form-label"  for="name">Nama Kategoori</label>
+            <input class="form-control" type="text" autocomplete="off" name="name" id="name" placeholder="Masukan nama kategoori" value="<?= $categories["name"]; ?>"
                 required="required" />
         </div>
 
-        <button class="btn" name="update_category" type="submit">Update kategori</button>
+        <button class="btn btn-primary" name="update_category" type="submit">Update kategori</button>
     </form>
+    </div>
 </main>

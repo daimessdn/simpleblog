@@ -11,7 +11,8 @@ if (!isset($_SESSION["token"])) {
     header("location:../auth/login.php");
 }
 ?>
-<main>
+<main class="w-100 pt-2">
+    <div class="container mx-auto">
     <?php
     if (isset($_GET["id"])) {
         $user_id = $_GET["id"];
@@ -46,20 +47,20 @@ if (!isset($_SESSION["token"])) {
     <form action="<?= $update_url; ?>" method="post" autocomplete="off">
         <h2>Edit user</h2>
         <div class="form-group">
-            <label for="name">Nama</label>
-            <input type="text" autocomplete="off" name="name" id="name" placeholder="Masukan name" value="<?= $users['name'] ?>"
+            <label class="form-label"  for="name">Nama</label>
+            <input class="form-control" type="text" autocomplete="off" name="name" id="name" placeholder="Masukan name" value="<?= $users['name'] ?>"
                 required="required" />
         </div>
 
         <div class="form-group">
-            <label for="usename">Username</label>
-            <input type="text" autocomplete="off" name="username" id="username" placeholder="Masukan username" value="<?= $users['username'] ?>"
+            <label class="form-label"  for="usename">Username</label>
+            <input class="form-control" type="text" autocomplete="off" name="username" id="username" placeholder="Masukan username" value="<?= $users['username'] ?>"
                 required="required" />
         </div>
 
         <div class="form-group">
-            <label for="role">Role</label>
-            <select <?php if ($users["id"] == $_SESSION["profile"]["id"]) echo 'disabled="disabled"' ?> autocomplete="off" name="role" id="role" placeholder="Pilih role" required="required">
+            <label class="form-label"  for="role">Role</label>
+            <select class="form-control" <?php if ($users["id"] == $_SESSION["profile"]["id"]) echo 'disabled="disabled"' ?> autocomplete="off" name="role" id="role" placeholder="Pilih role" required="required">
                 <option value="">Pilih role</option>
                 <option value="1" <?php if ($users["role"] == 1) echo 'selected="selected"'; ?>>Administrator</option>
                 <option value="2" <?php if ($users["role"] == 2) echo 'selected="selected"'; ?>>Kontributor</option>
@@ -67,12 +68,13 @@ if (!isset($_SESSION["token"])) {
         </div>
 
         <div class="form-group">
-            <label for="email">Email</label>
-            <input type="email" autocomplete="off" name="email" id="email" placeholder="Masukan alamat email" value="<?= $users['email'] ?>"
+            <label class="form-label"  for="email">Email</label>
+            <input class="form-control" type="email" autocomplete="off" name="email" id="email" placeholder="Masukan alamat email" value="<?= $users['email'] ?>"
                 required="required" />
         </div>
 
-        <button class="btn" name="update_user" type="submit">Update user</button>
+        <button class="btn btn-primary" name="update_user" type="submit">Update user</button>
         <a class="btn btn-secondary" href="users.dashboard.php">Batal</button>
     </form>
+    </div>
 </main>

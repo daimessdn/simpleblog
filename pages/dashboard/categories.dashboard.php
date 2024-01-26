@@ -11,7 +11,8 @@ if (!isset($_SESSION["token"])) {
     header("location:../auth/login.php");
 }
 ?>
-<main>
+<main class="w-100 pt-2">
+    <div class="container mx-auto">
     <?php
     if (isset($_POST["add_category"])) {
         $name = $_POST["name"];
@@ -26,7 +27,7 @@ if (!isset($_SESSION["token"])) {
 
     <h1>Kategori</h1>
 
-    <table>
+    <table class="table table-striped">
         <thead>
             <tr>
                 <th></th>
@@ -54,11 +55,11 @@ if (!isset($_SESSION["token"])) {
 
                     <?php if ($user->is_administrator($_SESSION["profile"]["id"])): ?>
                         <td style="display: flex; gap: .5rem;">
-                            <a href="categories.update.dashboard.php?id=<?= $categories['id'] ?>" class="btn">
+                            <a href="categories.update.dashboard.php?id=<?= $categories['id'] ?>" class="btn btn-sm btn-primary">
                                 Edit
                             </a>
 
-                            <a href="categories.delete.dashboard.php?id=<?= $categories['id'] ?>" class="btn btn-secondary">
+                            <a href="categories.delete.dashboard.php?id=<?= $categories['id'] ?>" class="btn btn-sm btn-outline-primary">
                                 Hapus
                             </a>
                         </td>
@@ -72,12 +73,13 @@ if (!isset($_SESSION["token"])) {
         <form action="categories.dashboard.php" method="post" autocomplete="off">
             <h2>Tambah Kategori</h2>
             <div class="form-group">
-                <label for="name">Nama Kategori</label>
-                <input type="text" autocomplete="off" name="name" id="name" placeholder="Masukan nama kategori"
+                <label class="form-label"  for="name">Nama Kategori</label>
+                <input class="form-control" type="text" autocomplete="off" name="name" id="name" placeholder="Masukan nama kategori"
                     required="required" />
             </div>
 
-            <button class="btn" name="add_category" type="submit">Tambah Kategori</button>
+            <button class="btn btn-primary" name="add_category" type="submit">Tambah Kategori</button>
         </form>
     <?php endif; ?>
+    </div>
 </main>

@@ -17,13 +17,13 @@
         border-radius: none;
         border: 1px solid #000000;
 
-        font-family: "Helvetica Neue", sans-serif;
+        font-family: -apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
         font-size: 12pt;
     }
 
     .btn {
         padding: .5rem 1rem;
-        font-family: "Helvetica Neue", sans-serif;
+        font-family: -apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
 
         background-color: #000000;
         color: #fff;
