@@ -43,8 +43,8 @@ if (!isset($_SESSION["token"])) {
         <form action="<?= $update_url; ?>" method="post" autocomplete="off">
             <h2>Edit Kategori</h2>
             <div class="form-group">
-                <label class="form-label" for="name">Nama Kategoori</label>
-                <input class="form-control form-control-sm" type="text" autocomplete="off" name="name" id="name" placeholder="Masukan nama kategoori" value="<?= $categories["name"]; ?>" required="required" />
+                <label class="form-label" for="name">Nama Kategori</label>
+                <input class="form-control form-control-sm" type="text" autocomplete="off" name="name" id="name" placeholder="Masukan nama kategori" value="<?= $categories["name"]; ?>" required="required" />
             </div>
 
             <button class="btn btn-sm btn-primary" name="update_category" type="submit">Update kategori</button>

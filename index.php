@@ -3,8 +3,6 @@ require_once("config/index.config.php");
 
 include_once("includes/blog/header.includes.php");
 
-?>
-<?php
 $show_posts = $post_model->select_all(["status" => 1]);
 ?>
 <main class="w-100 py-4">

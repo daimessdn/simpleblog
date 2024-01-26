@@ -5,9 +5,6 @@ require_once "../../includes/login/header.includes.php";
 
 require_once "../../styles/login.styles.php";
 
-?>
-
-<?php
 if (isset($_SESSION["token"])) {
     header("location:../dashboard/home.dashboard.php");
 }

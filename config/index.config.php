@@ -215,7 +215,10 @@ class Model
             $update_key = $update_keys_assoc[$i];
             $update_val = $update_params[$update_keys_assoc[$i]];
 
-            $set .= $update_key . "=" . (is_string($update_val) ? $this->to_str($update_val) : $update_val);
+            $set .= $update_key . "=" . (($update_key == "password") ?
+                $this->to_str(password_hash($update_val, PASSWORD_DEFAULT)) : (is_string($update_val) ?
+                    $this->to_str($update_val) :
+                    $update_val));
 
             if ($i != ($update_keys_size - 1)) {
                 $set .= ", ";
