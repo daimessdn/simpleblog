@@ -11,23 +11,33 @@
         margin-bottom: 1rem;
     }
 
+    .form-label {
+        font-size: .875rem !important;
+        line-height: 1.5rem;
+    }
+
     table {
         margin: 1rem 0;
         border-collapse: collapse;
         width: 100%;
 
-        font-size: 1rem;
-
         text-align: left;
     }
 
-    table tr th, table tr td {
+    table tr th,
+    table tr td {
         padding: .5rem;
 
+        font-size: .875rem;
         line-height: 1.5rem;
     }
 
-    table tr th:first-child, table tr td:first-child {
+    table tr td span {
+        font-size: .875rem;
+    }
+
+    table tr th:first-child,
+    table tr td:first-child {
         width: 1rem;
     }
 </style>

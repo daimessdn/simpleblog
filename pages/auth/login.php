@@ -16,13 +16,13 @@ if (isset($_POST["login"])) {
     $username = $_POST["username"];
     $password = $_POST["password"];
 
-    $is_user_exists = $user->check_user_exists($username);
+    $is_user_exists = $user_model->check_user_exists($username);
 
     if ($is_user_exists) {
-        $is_password_match = $user->verify_password($username, $password);
+        $is_password_match = $user_model->verify_password($username, $password);
 
         if ($is_password_match) {
-            $profile = $user->select_all(["username" => $username])[0];
+            $profile = $user_model->select_all(["username" => $username])[0];
 
             $_SESSION["token"] = hash("md5", $username);
             $_SESSION["profile"] = [
@@ -50,8 +50,7 @@ if (isset($_POST["login"])) {
 
             <div class="form-group">
                 <label class="form-label" for="password">Password</label>
-                <input type="password" name="password" id="password" required="required"
-                    placeholder="Masukan password" />
+                <input type="password" name="password" id="password" required="required" placeholder="Masukan password" />
             </div>
 
             <button class="btn btn-primary" name="login" type="submit">Login</button>

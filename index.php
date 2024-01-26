@@ -5,16 +5,16 @@ include_once("includes/blog/header.includes.php");
 
 ?>
 <?php
-    $show_posts = $post->select_all(["status" => 1]);
+$show_posts = $post_model->select_all(["status" => 1]);
 ?>
 <main class="w-100 py-4">
     <div class="container mx-auto">
-    <?php foreach ($show_posts as $posts) : ?>
-        <h1><?= $posts["title"]; ?></h1>
-        <p><?= $posts["post"]; ?></p>
+        <?php foreach ($show_posts as $posts) : ?>
+            <h1><?= $posts["title"]; ?></h1>
+            <p><?= $posts["post"]; ?></p>
 
-        <hr />
-    <?php endforeach; ?>
+            <hr />
+        <?php endforeach; ?>
     </div>
 </main>
 

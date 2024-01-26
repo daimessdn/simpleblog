@@ -13,22 +13,22 @@ if (!isset($_SESSION["token"])) {
 ?>
 <main class="w-100 pt-2">
     <div class="container mx-auto">
-    <?php
-    // get post based on id
-    if (isset($_GET["id"])) {
-        $post_id = $_GET["id"];
+        <?php
+        // get post based on id
+        if (isset($_GET["id"])) {
+            $post_id = $_GET["id"];
 
-        $posts = $post->select_all(["id" => $post_id]);
+            $posts = $post_model->select_all(["id" => $post_id]);
 
-        if (sizeof($posts) > 0) {
-            $post->delete(["id" => $post_id]);
-            header("location:posts.dashboard.php");
-        } else {
-            http_response_code(404);
+            if (sizeof($posts) > 0) {
+                $post_model->delete(["id" => $post_id]);
+                header("location:posts.dashboard.php");
+            } else {
+                http_response_code(404);
 
-            echo "Postingan tidak ditemukan";
+                echo "Postingan tidak ditemukan";
+            }
         }
-    }
-    ?>
+        ?>
     </div>
 </main>

@@ -104,8 +104,7 @@ class Model
             $values .= (
                 $key == "password" ?
                 $this->to_str(password_hash($val, PASSWORD_DEFAULT))
-                :
-                (
+                : (
                     is_string($val) ? $this->to_str($val) : $val)
             ) . (
                 $i < ($keys_size - 1) ? ", " : ""
@@ -174,8 +173,6 @@ class Model
         }
 
         $query = "SELECT COUNT(*) as count FROM " . $table . $where . $limit . $offset . ";";
-
-        echo $query;
 
         return $this->fetch($query)[0]["count"];
     }
@@ -281,7 +278,8 @@ class UserModel extends Model
         return sizeof($users) > 0;
     }
 
-    public function is_administrator($id) {
+    public function is_administrator($id)
+    {
         $user = $this->select_all(["id" => $id])[0];
         return $user["role"] == 1;
     }
@@ -289,12 +287,10 @@ class UserModel extends Model
 
 class PostModel extends Model
 {
-
 }
 
 class CategoryModel extends Model
 {
-
 }
 
 if ($conn == true) {
@@ -306,7 +302,7 @@ if ($conn == true) {
             - 2: kontributor
     */
 
-    $user = new UserModel($conn, "users", [
+    $user_model = new UserModel($conn, "users", [
         ["name" => "id", "type" => "int", "null" => false, "auto_increment" => true],
         ["name" => "name", "type" => "varchar(100)", "null" => true, "default" => ""],
         ["name" => "role", "type" => "int", "null" => false],
@@ -328,7 +324,7 @@ if ($conn == true) {
             - 1: published
     */
 
-    $post = new PostModel($conn, "posts", [
+    $post_model = new PostModel($conn, "posts", [
         ["name" => "id", "type" => "int", "null" => false, "auto_increment" => true],
         ["name" => "title", "type" => "varchar(200)", "null" => false,],
         ["name" => "category", "type" => "int", "null" => false,],
@@ -348,18 +344,18 @@ if ($conn == true) {
     ]);
 
     // buat table users
-    $user->create_table_query();
+    $user_model->create_table_query();
 
     // buat user admin pertama
-    if ($user->check_is_empty()) {
-        $user->insert([
+    if ($user_model->check_is_empty()) {
+        $user_model->insert([
             "name" => "Ini Admin",
             "username" => "admin",
             "email" => "admin@example.com",
             "password" => "123",
             "role" => 1,
         ]);
-        $user->insert([
+        $user_model->insert([
             'name' => 'Om Burhan',
             'email' => 'burhan@example.com',
             'username' => 'om_burhan',
@@ -369,11 +365,11 @@ if ($conn == true) {
     }
 
     // buat table postingan
-    $post->create_table_query();
+    $post_model->create_table_query();
 
     // membuat postingan pertama
-    if ($post->check_is_empty()) {
-        $post->insert([
+    if ($post_model->check_is_empty()) {
+        $post_model->insert([
             'title' => 'Hello, world',
             'category' => 1,
             'post' => 'Added the first post on simpleblog.',
@@ -381,10 +377,10 @@ if ($conn == true) {
             'published_at' => date("Y-m-d H:i:s"),
         ]);
     }
-    
+
     // membuat table category
     $category_model->create_table_query();
-    
+
     if ($category_model->check_is_empty()) {
         $category_model->insert(["name" => "Belum ada kategori"]);
         $category_model->insert(["name" => "Artikel"]);
@@ -393,7 +389,7 @@ if ($conn == true) {
         $category_model->insert(["name" => "Jurnal"]);
         $category_model->insert(["name" => "Portfolio"]);
         $category_model->insert(["name" => "Ulasan"]);
-        
+
         header("location:./pages/auth/login.php");
     }
 }

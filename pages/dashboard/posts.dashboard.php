@@ -20,7 +20,7 @@ if (!isset($_SESSION["token"])) {
             $category = $_POST["category"];
             $body = $_POST["content"];
 
-            $post->insert([
+            $post_model->insert([
                 "title" => $title,
                 "category" => $category,
                 "post" => $body,
@@ -34,7 +34,7 @@ if (!isset($_SESSION["token"])) {
             $category = $_POST["category"];
             $body = $_POST["content"];
 
-            $post->insert([
+            $post_model->insert([
                 "title" => $title,
                 "category" => $category,
                 "post" => $body,
@@ -56,19 +56,17 @@ if (!isset($_SESSION["token"])) {
 
         $limit = 5;
 
-        $total_posts = $post->count_all();
-        echo $post->count_all([], $limit, $page * $limit);
-        echo var_dump($post->select_all([], $limit, $page * $limit));
+        $total_posts = $post_model->count_all();
         ?>
 
-        <table class="table table-striped">
+        <table class="table table-striped align-middle">
             <thead>
                 <tr>
                     <th></th>
                     <th>Judul</th>
                     <th>Kategori</th>
                     <th></th>
-                    <th>Isi postingan</th>
+                    <th class="text-truncate" style="max-width: 20rem;">Isi postingan</th>
                     <th></th>
                 </tr>
             </thead>
@@ -76,11 +74,11 @@ if (!isset($_SESSION["token"])) {
             <tbody>
                 <?php
                 // view posts
-                $view_posts = $post->select_all();
+                $view_posts = $post_model->select_all([], $limit, ($page - 1) * $limit);
 
-                foreach ($view_posts as $posts):
+                foreach ($view_posts as $posts) :
                     $post_category = $category_model->select_all(["id" => $posts["category"]])[0]["name"];
-                    ?>
+                ?>
                     <tr>
                         <td>
                             <?= $posts["id"]; ?>
@@ -94,8 +92,8 @@ if (!isset($_SESSION["token"])) {
                         <td>
                             <?= $posts["status"] == 0 ? "<em>Draft</em>" : ""; ?>
                         </td>
-                        <td>
-                            <?= $posts["post"]; ?>
+                        <td class="text-truncate" style="max-width: 20rem;">
+                            <span><?= $posts["post"]; ?></span>
                         </td>
 
                         <td style="display: flex; gap: .5rem;">
@@ -103,8 +101,7 @@ if (!isset($_SESSION["token"])) {
                                 Edit
                             </a>
 
-                            <a href="posts.delete.dashboard.php?id=<?= $posts['id'] ?>"
-                                class="btn btn-sm btn-outline-primary">
+                            <a href="posts.delete.dashboard.php?id=<?= $posts['id'] ?>" class="btn btn-sm btn-outline-primary">
                                 Hapus
                             </a>
                         </td>
@@ -114,16 +111,32 @@ if (!isset($_SESSION["token"])) {
         </table>
 
         <nav aria-label="posts__navigation">
-            <ul class="pagination justify-content-end">
-                
-                <li class="page-item <?php ($page > 1) ? "disabled" : "" ?>">
-                    <a class="page-link">Previous</a>
+            <ul class="pagination pagination-sm justify-content-end">
+
+                <li class="page-item <?= $page <= 1 ? "disabled" : "" ?>">
+                    <a class="page-link" href="<?= "posts.dashboard.php?page=" . ($page - 1); ?>">
+                        Previous
+                    </a>
                 </li>
-                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item">
-                    <a class="page-link" href="#">Next</a>
+
+                <?php
+                $page_amount = $total_posts % $limit == 0 ?
+                    intdiv($total_posts, $limit) :
+                    ceil($total_posts / $limit);
+
+                for ($i = 1; $i <= $page_amount; $i++) :
+                ?>
+                    <li class="page-item">
+                        <a class="page-link" href="<?= "posts.dashboard.php?page=" . $i; ?>">
+                            <?= $i; ?>
+                        </a>
+                    </li>
+                <?php endfor; ?>
+
+                <li class="page-item <?= $page >= $page_amount ? "disabled" : "" ?>">
+                    <a class="page-link" href="<?= "posts.dashboard.php?page=" . ($page <= 1 ? 2 : $page + 1); ?>">
+                        Next
+                    </a>
                 </li>
             </ul>
         </nav>
@@ -132,21 +145,19 @@ if (!isset($_SESSION["token"])) {
             <h2>Tulis blog</h2>
             <div class="form-group">
                 <label class="form-label" for="title">Judul Postingan</label>
-                <input class="form-control" type="text" autocomplete="off" name="title" id="title"
-                    placeholder="Masukan judul postingan" required="required" />
+                <input class="form-control form-control-sm" type="text" autocomplete="off" name="title" id="title" placeholder="Masukan judul postingan" required="required" />
             </div>
 
             <div class="form-group">
                 <label class="form-label" for="category">Kategori</label>
-                <select class="form-control" autocomplete="off" name="category" id="category"
-                    placeholder="Pilih kategori" required="required">
+                <select class="form-control form-control-sm" autocomplete="off" name="category" id="category" placeholder="Pilih kategori" required="required">
                     <option value="">Pilih kategori</option>
 
                     <?php
                     $show_categories = $category_model->select_all();
 
-                    foreach ($show_categories as $categories):
-                        ?>
+                    foreach ($show_categories as $categories) :
+                    ?>
                         <option value="<?= $categories['id']; ?>">
                             <?= $categories['name']; ?>
                         </option>
@@ -156,12 +167,11 @@ if (!isset($_SESSION["token"])) {
 
             <div class="form-group">
                 <label class="form-label" for="content">Isi</label>
-                <textarea class="form-control" rows="5" autocomplete="off" name="content" id="content"
-                    placeholder="Tulis blog disini" required="required"></textarea>
+                <textarea class="form-control form-control-sm" rows="5" autocomplete="off" name="content" id="content" placeholder="Tulis blog disini" required="required"></textarea>
             </div>
 
-            <button class="btn btn-primary" name="add_posts" type="submit">Tulis postingan</button>
-            <button class="btn btn-outline-primary" name="add_draft" type="submit">Simpan sebagai draft</button>
+            <button class="btn btn-sm btn-primary" name="add_posts" type="submit">Tulis postingan</button>
+            <button class="btn btn-sm btn-outline-primary" name="add_draft" type="submit">Simpan sebagai draft</button>
         </form>
     </div>
 </main>

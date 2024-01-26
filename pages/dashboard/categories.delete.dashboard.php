@@ -13,26 +13,26 @@ if (!isset($_SESSION["token"])) {
 ?>
 <main class="w-100 pt-2">
     <div class="container mx-auto">
-    <?php
-    // get category based on id
-    if (isset($_GET["id"])) {
-        $category_id = $_GET["id"];
+        <?php
+        // get category based on id
+        if (isset($_GET["id"])) {
+            $category_id = $_GET["id"];
 
-        $categories = $category_model->select_all(["id" => $category_id]);
+            $categories = $category_model->select_all(["id" => $category_id]);
 
-        if (sizeof($categories) > 0) {
-            $post->update(
-                ["category" => $category_id,],
-                ["category" => 1,],
-            );
-            $category_model->delete(["id" => $category_id]);
-            header("location:categories.dashboard.php");
-        } else {
-            http_response_code(404);
+            if (sizeof($categories) > 0) {
+                $post_model->update(
+                    ["category" => $category_id,],
+                    ["category" => 1,],
+                );
+                $category_model->delete(["id" => $category_id]);
+                header("location:categories.dashboard.php");
+            } else {
+                http_response_code(404);
 
-            echo "Kategori tidak ditemukan";
+                echo "Kategori tidak ditemukan";
+            }
         }
-    }
-    ?>
+        ?>
     </div>
 </main>
