@@ -11,7 +11,6 @@ if (!isset($_SESSION["token"])) {
     header("location:../auth/login.php");
 }
 ?>
-
 <main>
     <?php
     if (isset($_POST["add_posts"])) {
@@ -51,8 +50,8 @@ if (!isset($_SESSION["token"])) {
             <tr>
                 <th></th>
                 <th>Judul</th>
+                <th>Kategori</th>
                 <th></th>
-                <!-- <th>Kategori</th> -->
                 <th>Isi postingan</th>
                 <th></th>
             </tr>
@@ -62,24 +61,25 @@ if (!isset($_SESSION["token"])) {
             <?php
             // view posts
             $view_posts = $post->select_all();
-
+            
             foreach ($view_posts as $posts):
+                $post_category = $category_model->select_all(["id" => $posts["category"]])[0]["name"];
                 ?>
                 <tr>
                     <td>
-                        <?= $posts["id"] ?>
+                        <?= $posts["id"]; ?>
                     </td>
                     <td>
-                        <?= $posts["title"] ?>
+                        <?= $posts["title"]; ?>
                     </td>
                     <td>
-                        <?= $posts["status"] == 0 ? "<em>Draft</em>" : "" ?>
+                        <?= $post_category; ?>
                     </td>
-                    <!-- <td>
-                        <?= $posts["category"] ?>
-                    </td> -->
                     <td>
-                        <?= $posts["post"] ?>
+                        <?= $posts["status"] == 0 ? "<em>Draft</em>" : ""; ?>
+                    </td>
+                    <td>
+                        <?= $posts["post"]; ?>
                     </td>
                     
                     <td style="display: flex; gap: .5rem;">
@@ -109,11 +109,14 @@ if (!isset($_SESSION["token"])) {
             <select autocomplete="off" name="category" id="category" placeholder="Pilih kategori"
                 required="required">
                 <option value="">Pilih kategori</option>
-                <option value="0">Belum ada kategori</option>
-                <option value="1">Artikel</option>
-                <option value="2">Blog</option>
-                <option value="3">Berita</option>
-                <option value="4">Portfolio</option>
+
+                <?php
+                    $show_categories = $category_model->select_all();
+
+                    foreach ($show_categories as $categories) :
+                ?>
+                <option value="<?= $categories['id']; ?>"><?= $categories['name']; ?></option>
+                <?php endforeach; ?>
             </select>
         </div>
 

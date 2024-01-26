@@ -4,11 +4,9 @@ require_once("config/index.config.php");
 include_once("includes/blog/header.includes.php");
 
 ?>
-
 <?php
     $show_posts = $post->select_all(["status" => 1]);
 ?>
-
 <main>
     <?php foreach ($show_posts as $posts) : ?>
         <h1><?= $posts["title"]; ?></h1>

@@ -11,7 +11,6 @@ if (!isset($_SESSION["token"])) {
     header("location:../auth/login.php");
 }
 ?>
-
 <main>
     <?php
     if (isset($_GET["id"])) {
@@ -24,15 +23,16 @@ if (!isset($_SESSION["token"])) {
         $name = $_POST["name"];
         $username = $_POST["username"];
         $email = $_POST["email"];
+        $role = $_POST["role"];
 
         $user->update(["id" => $user_id],[
             'name' => $name,
             'username' => $username,
             'email' => $email,
+            'role' => $role,
             "updated_at" => date("Y-m-d H:i:s"),
         ]);
 
-        echo "sukses update user $username";
         header("location:users.dashboard.php");
     }
     ?>

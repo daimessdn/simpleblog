@@ -9,9 +9,7 @@ require_once("../../includes/dashboard/nav.includes.php");
 
 if (!isset($_SESSION["token"])) {
     header("location:../auth/login.php");
-}
-?>
-
+}?>
 <main>
     <?php
     // get post based on id
@@ -31,12 +29,10 @@ if (!isset($_SESSION["token"])) {
             "category" => $category,
             "post" => $body,
             "status" => 1,
-            "published_at" => $posts["status"] == 0 ? date("Y-m-d H:i:s") : null,
+            "published_at" => $posts["status"] == 0 ? date("Y-m-d H:i:s") : $posts["published_at"],
             "updated_at" => date("Y-m-d H:i:s"),
         ]);
 
-        echo "sukses update postingan <strong>$title</strong>";
-        
         header("location:posts.dashboard.php");
     } else if (isset($_POST["update_draft"])) {
         $title = $_POST["title"];
@@ -50,20 +46,17 @@ if (!isset($_SESSION["token"])) {
             "status" => 0,
         ]);
 
-        echo "postingan <strong>$title</strong> disimpan sebagai draft";
-
         header("location:posts.dashboard.php");
     }
     ?>
-
-    <h1>Edit Postingan</h1>
+    <h1>Postingan</h1>
 
     <?php
         $update_url = $_SERVER['PHP_SELF'] . "?id=" . $post_id;
     ?>
 
     <form action="<?= $update_url; ?>" method="post" autocomplete="off">
-        <h2>Tulis blog</h2>
+        <h2>Edit Blog</h2>
         <div class="form-group">
             <label for="title">Judul Postingan</label>
             <input type="text" autocomplete="off" name="title" id="title" placeholder="Masukan judul postingan" value="<?= $posts["title"]; ?>"
@@ -75,11 +68,15 @@ if (!isset($_SESSION["token"])) {
             <select autocomplete="off" name="category" id="category" placeholder="Pilih kategori" ="<?= $posts["category"]; ?>"
                 required="required">
                 <option value="">Pilih kategori</option>
-                <option value="0" <?php if ($posts["category"] == 0) echo 'selected="selected"'; ?>>Belum ada kategori</option>
-                <option value="1" <?php if ($posts["category"] == 1) echo 'selected="selected"'; ?>>Artikel</option>
-                <option value="2" <?php if ($posts["category"] == 2) echo 'selected="selected"'; ?>>Blog</option>
-                <option value="3" <?php if ($posts["category"] == 3) echo 'selected="selected"'; ?>>Berita</option>
-                <option value="4" <?php if ($posts["category"] == 4) echo 'selected="selected"'; ?>>Portfolio</option>
+
+                
+                <?php
+                    $show_categories = $category_model->select_all();
+
+                    foreach ($show_categories as $categories) :
+                ?>
+                <option value="<?= $categories['id']; ?>" <?php if ($posts["category"] == $categories['id']) echo 'selected="selected"'; ?>><?= $categories['name']; ?></option>
+                <?php endforeach; ?>
             </select>
         </div>
 

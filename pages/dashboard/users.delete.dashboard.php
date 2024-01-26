@@ -11,7 +11,6 @@ if (!isset($_SESSION["token"])) {
     header("location:../auth/login.php");
 }
 ?>
-
 <main>
     <?php
     // get user based on id

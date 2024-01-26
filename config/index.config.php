@@ -58,8 +58,6 @@ class Model
 
             $model_query .= $params_i["name"] . " " . $params_i["type"] . " ";
 
-
-
             foreach ($params_i as $param => $val) {
                 if ($param == "null") {
                     $model_query .= $val ? "NULL " : "NOT NULL ";
@@ -90,16 +88,17 @@ class Model
         $query = "";
 
         $keys_assoc = array_keys($params);
+        $keys_size = sizeof($keys_assoc);
 
         $keys = "";
         $values = "";
 
-        for ($i = 0; $i < sizeof($keys_assoc); $i++) {
+        for ($i = 0; $i < $keys_size; $i++) {
             $key = $keys_assoc[$i];
             $val = $params[$keys_assoc[$i]];
 
             $keys .= $key . (
-                $i < (sizeof($keys_assoc) - 1) ? ", " : ""
+                $i < ($keys_size - 1) ? ", " : ""
             );
 
             $values .= (
@@ -109,7 +108,7 @@ class Model
                 (
                     is_string($val) ? $this->to_str($val) : $val)
             ) . (
-                $i < (sizeof($keys_assoc) - 1) ? ", " : ""
+                $i < ($keys_size - 1) ? ", " : ""
             );
         }
 
@@ -135,7 +134,7 @@ class Model
                 $key = $keys_assoc[$i];
                 $val = $params[$keys_assoc[$i]];
 
-                $where .= $key . " = " . (is_string($val) ? $this->to_str($val) : $val);
+                $where .= $key . "=" . (is_string($val) ? $this->to_str($val) : $val);
 
                 if ($i != ($keys_size - 1)) {
                     $where .= " AND ";
@@ -170,7 +169,7 @@ class Model
             $key = $keys_assoc[$i];
             $val = $params[$keys_assoc[$i]];
 
-            $where .= $key . " = " . (is_string($val) ? $this->to_str($val) : $val);
+            $where .= $key . "=" . (is_string($val) ? $this->to_str($val) : $val);
 
             if ($i != ($keys_size - 1)) {
                 $where .= " AND ";
@@ -186,7 +185,7 @@ class Model
             $update_key = $update_keys_assoc[$i];
             $update_val = $update_params[$update_keys_assoc[$i]];
 
-            $set .= $update_key . " = " . (is_string($update_val) ? $this->to_str($update_val) : $update_val);
+            $set .= $update_key . "=" . (is_string($update_val) ? $this->to_str($update_val) : $update_val);
 
             if ($i != ($update_keys_size - 1)) {
                 $set .= ", ";
@@ -195,7 +194,7 @@ class Model
 
         $query = "UPDATE " . $table . " SET " . $set . $where . $limit . $offset . ";";
 
-        return $this->fetch($query);
+        return $this->exec($query);
     }
 
     public function delete($params = [], $limit = -1, $offset = -1)
@@ -214,7 +213,7 @@ class Model
             $key = $keys_assoc[$i];
             $val = $params[$keys_assoc[$i]];
 
-            $where .= $key . " = " . (is_string($val) ? $this->to_str($val) : $val);
+            $where .= $key . "=" . (is_string($val) ? $this->to_str($val) : $val);
 
             if ($i != ($keys_size - 1)) {
                 $where .= " AND ";
@@ -260,6 +259,11 @@ class PostModel extends Model
 
 }
 
+class CategoryModel extends Model
+{
+
+}
+
 if ($conn == true) {
     /*
         DOKUMENTASI USER
@@ -284,11 +288,7 @@ if ($conn == true) {
         DOKUMENTASI POST
         
         - category: menggambarkan kategori post
-            - 0: belum ada kategori
-            - 1: artikel
-            - 2: blog
-            - 3: berita
-            - 4: portfolio
+            - bisa dikelola di table categories
         
         - status: menggambarkan status post
             - 0: draft,
@@ -302,6 +302,14 @@ if ($conn == true) {
         ["name" => "status", "type" => "int", "null" => false,],
         ["name" => "post", "type" => "text", "null" => false,],
         ["name" => "published_at", "type" => "datetime", "null" => true,],
+        ["name" => "created_at", "type" => "datetime", "null" => false, "default" => "current_timestamp",],
+        ["name" => "updated_at", "type" => "datetime", "null" => true,],
+    ]);
+
+    // buat tabel category
+    $category_model = new CategoryModel($conn, "categories", [
+        ["name" => "id", "type" => "int", "null" => false, "auto_increment" => true],
+        ["name" => "name", "type" => "varchar(100)", "null" => false,],
         ["name" => "created_at", "type" => "datetime", "null" => false, "default" => "current_timestamp",],
         ["name" => "updated_at", "type" => "datetime", "null" => true,],
     ]);
@@ -334,12 +342,25 @@ if ($conn == true) {
     if ($post->check_is_empty()) {
         $post->insert([
             'title' => 'Hello, world',
-            'category' => 0,
+            'category' => 1,
             'post' => 'Added the first post on simpleblog.',
             'status' => 1,
             'published_at' => date("Y-m-d H:i:s"),
         ]);
-
+    }
+    
+    // membuat table category
+    $category_model->create_table_query();
+    
+    if ($category_model->check_is_empty()) {
+        $category_model->insert(["name" => "Belum ada kategori"]);
+        $category_model->insert(["name" => "Artikel"]);
+        $category_model->insert(["name" => "Blog"]);
+        $category_model->insert(["name" => "Berita"]);
+        $category_model->insert(["name" => "Jurnal"]);
+        $category_model->insert(["name" => "Portfolio"]);
+        $category_model->insert(["name" => "Ulasan"]);
+        
         header("location:./pages/auth/login.php");
     }
 }

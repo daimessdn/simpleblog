@@ -12,7 +12,6 @@ if (!isset($_SESSION["token"])) {
 }
 
 ?>
-
 <main>
     <h1>Selamat datang!</h1>
 
