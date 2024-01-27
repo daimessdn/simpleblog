@@ -73,7 +73,7 @@ if (!isset($_SESSION["token"])) {
             </div>
 
             <button class="btn btn-sm btn-primary" name="update_user" type="submit">Update user</button>
-            <a class="btn btn-sm btn-secondary" href="users.dashboard.php">Batal</button>
+            <a class="btn btn-sm btn-secondary" href="users.dashboard.php">Batal</a>
         </form>
     </div>
 </main>

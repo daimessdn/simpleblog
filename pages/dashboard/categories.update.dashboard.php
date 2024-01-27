@@ -49,6 +49,7 @@ if (!isset($_SESSION["token"])) {
             </div>
 
             <button class="btn btn-sm btn-primary" name="update_category" type="submit">Update kategori</button>
+            <a class="btn btn-sm btn-secondary" href="categories.dashboard.php">Batal</a>
         </form>
     </div>
 </main>
