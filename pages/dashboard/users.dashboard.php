@@ -8,10 +8,12 @@ require_once("../../includes/dashboard/header.includes.php");
 require_once("../../includes/dashboard/nav.includes.php");
 
 if (!isset($_SESSION["token"])) {
-    header("location:../auth/login.php");
+    $_SESSION["message"] = "Anda harus login dulu untuk mengakses <em>dashboard</em>.";
+    
+    echo "<script>window.location.href = '../auth/login.php';</script>";
 }
 ?>
-<main class="w-100 pt-2">
+<main class="py-3">
     <div class="container mx-auto">
         <?php
         if (isset($_POST["add_user"])) {
@@ -28,10 +30,17 @@ if (!isset($_SESSION["token"])) {
                 'email' => $email,
                 'password' => $password,
             ]);
+
+            $_SESSION["message"] = "Sukses menambah user: <strong>$name</strong>.";
         }
         ?>
 
         <h1>User</h1>
+
+        <?php if (isset($_SESSION["message"])) {
+            generate_message("success", $_SESSION["message"]);
+            unset($_SESSION["message"]);
+        } ?>
 
         <?php
         if (isset($_GET["page"])) {

@@ -8,11 +8,12 @@ require_once("../../includes/dashboard/header.includes.php");
 require_once("../../includes/dashboard/nav.includes.php");
 
 if (!isset($_SESSION["token"])) {
-    header("location:../auth/login.php");
+    $_SESSION["message"] = "Anda harus login dulu untuk mengakses <em>dashboard</em>.";
+    echo "<script>window.location.href = '../auth/login.php';</script>";
 }
 ?>
 
-<main class="w-100 pt-2">
+<main class="py-3">
     <div class="container mx-auto">
         <?php
         if (isset($_POST["add_posts"])) {
@@ -28,7 +29,7 @@ if (!isset($_SESSION["token"])) {
                 "published_at" => date("Y-m-d H:i:s"),
             ]);
 
-            echo "sukses tambah postingan <strong>$title</strong>";
+            $_SESSION["message"] = "Sukses menambah postingan: <strong>$title</strong>.";
         } else if (isset($_POST["add_draft"])) {
             $title = $_POST["title"];
             $category = $_POST["category"];
@@ -41,11 +42,16 @@ if (!isset($_SESSION["token"])) {
                 "status" => 0,
             ]);
 
-            echo "postingan <strong>$title</strong> disimpan sebagai draft";
+            $_SESSION["message"] = "Postingan <strong>$title</strong> disimpan sebagai draft.";
         }
         ?>
 
         <h1>Postingan</h1>
+
+        <?php if (isset($_SESSION["message"])) {
+            generate_message("success", $_SESSION["message"]);
+            unset($_SESSION["message"]);
+        } ?>
 
         <?php
         if (isset($_GET["page"])) {

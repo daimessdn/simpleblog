@@ -396,3 +396,8 @@ if ($conn == true) {
         header("location:./pages/auth/login.php");
     }
 }
+
+// PHP CUSTOM REUSE FUNCTIONS
+function generate_message($type, $message) {
+    echo '<div class="alert alert-' . $type . '" role="alert">' . $message . '</div>';
+}

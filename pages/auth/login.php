@@ -28,17 +28,26 @@ if (isset($_POST["login"])) {
                 "email" => $profile["email"],
                 "username" => $profile["username"],
             ];
+            
+            $_SESSION["message"] = "Login berhasil. Selamat datang, " . $profile["name"] . "!";
 
             header("location:../dashboard/home.dashboard.php");
+        } else {
+            $_SESSION["message"] = "Terjadi kesalahan ketika login. Coba lagi.";
         }
     } else {
-        echo "login failed";
+        $_SESSION["message"] = "Terjadi kesalahan ketika login. Coba lagi.";
     }
 }
 ?>
 
-<main class="w-100 pt-2">
+<main class="py-3">
     <div class="container mx-auto">
+        <?php if (isset($_SESSION["message"])) {
+            generate_message("primary", $_SESSION["message"]);
+            unset($_SESSION["message"]);
+        } ?>
+        
         <form autocomplete="off" action="login.php" method="post">
             <div class="form-group">
                 <label class="form-label" for="username">Username</label>

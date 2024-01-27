@@ -105,7 +105,7 @@
         </div>
     </nav>
 
-    <header class="py-4">
+    <header class="pt-4">
         <div class="container">
             <h1>simpleblog</h1>
         </div>

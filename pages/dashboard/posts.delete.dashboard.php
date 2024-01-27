@@ -8,21 +8,24 @@ require_once("../../includes/dashboard/header.includes.php");
 require_once("../../includes/dashboard/nav.includes.php");
 
 if (!isset($_SESSION["token"])) {
-    header("location:../auth/login.php");
+    $_SESSION["message"] = "Anda harus login dulu untuk mengakses <em>dashboard</em>.";
+    echo "<script>window.location.href = '../auth/login.php';</script>";
 }
 ?>
-<main class="w-100 pt-2">
+<main class="py-3">
     <div class="container mx-auto">
         <?php
         // get post based on id
         if (isset($_GET["id"])) {
             $post_id = $_GET["id"];
 
-            $posts = $post_model->select_all(["id" => $post_id]);
-
-            if (sizeof($posts) > 0) {
+            $post = $post_model->select_all(["id" => $post_id]);
+            
+            if (sizeof($post) > 0) {
+                $title = $post[0]["title"];
                 $post_model->delete(["id" => $post_id]);
-                header("location:posts.dashboard.php");
+                $_SESSION["message"] = "Berhasil menghapus postingan: <strong>$title</strong>.";
+                echo "<script>window.location.href = 'posts.dashboard.php';</script>";
             } else {
                 http_response_code(404);
 

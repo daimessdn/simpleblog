@@ -1,6 +1,11 @@
 <style>
     .dashboard-nav {
-        width: 15%;
+        width: 20%;
+    }
+
+    main {
+        width: 80%;
+        margin-left: auto;
     }
 
     .form-group {

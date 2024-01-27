@@ -8,12 +8,13 @@ require_once("../../includes/dashboard/header.includes.php");
 require_once("../../includes/dashboard/nav.includes.php");
 
 if (!isset($_SESSION["token"])) {
-    header("location:../auth/login.php");
+    $_SESSION["message"] = "Anda harus login dulu untuk mengakses <em>dashboard</em>.";
+    echo "<script>window.location.href = '../auth/login.php';</script>";
 }
 
 $profile_id = $_SESSION["profile"]["id"];
 ?>
-<main class="w-100 pt-2">
+<main class="py-3">
     <div class="container mx-auto">
         <?php
         // get post based on id

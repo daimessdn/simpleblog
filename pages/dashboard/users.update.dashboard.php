@@ -8,10 +8,11 @@ require_once("../../includes/dashboard/header.includes.php");
 require_once("../../includes/dashboard/nav.includes.php");
 
 if (!isset($_SESSION["token"])) {
-    header("location:../auth/login.php");
+    $_SESSION["message"] = "Anda harus login dulu untuk mengakses <em>dashboard</em>.";
+    echo "<script>window.location.href = '../auth/login.php';</script>";
 }
 ?>
-<main class="w-100 pt-2">
+<main class="py-3">
     <div class="container mx-auto">
         <?php
         if (isset($_GET["id"])) {
@@ -34,6 +35,7 @@ if (!isset($_SESSION["token"])) {
                 "updated_at" => date("Y-m-d H:i:s"),
             ]);
 
+            $_SESSION["message"] = "Sukses meng-<em>update</em> user: <strong>$name</strong>.";
             echo "<script>window.location.href = 'users.dashboard.php';</script>";
         }
         ?>

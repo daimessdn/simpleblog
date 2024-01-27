@@ -8,25 +8,29 @@ require_once("../../includes/dashboard/header.includes.php");
 require_once("../../includes/dashboard/nav.includes.php");
 
 if (!isset($_SESSION["token"])) {
-    header("location:../auth/login.php");
+    $_SESSION["message"] = "Anda harus login dulu untuk mengakses <em>dashboard</em>.";
+    echo "<script>window.location.href = '../auth/login.php';</script>";
 }
 ?>
-<main class="w-100 pt-2">
+<main class="py-3">
     <div class="container mx-auto">
         <?php
         // get user based on id
         if (isset($_GET["id"])) {
             $user_id = $_GET["id"];
 
-            $users = $user_model->select_all(["id" => $user_id]);
+            $user = $user_model->select_all(["id" => $user_id]);
 
-            if (sizeof($users) > 0) {
+            if (sizeof($user) > 0) {
+                $name = $user[0]["name"];
+                $_SESSION["message"] = "Sukses menghapus user: <strong>$name</strong>.";
+
                 $user_model->delete(["id" => $user_id]);
-                header("location:users.dashboard.php");
-            } else {
+                echo "<script>window.location.href = 'users.dashboard.php';</script>";
+        } else {
                 http_response_code(404);
 
-                echo "user tidak ditemukan";
+                echo "User tidak ditemukan";
             }
         }
         ?>

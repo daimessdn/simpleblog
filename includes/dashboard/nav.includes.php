@@ -1,4 +1,4 @@
-<nav class="dashboard-nav navbar navbar-dark bg-dark text-light flex flex-column align-items-start justify-content-start">
+<nav class="fixed-left fixed-top h-100 dashboard-nav navbar navbar-dark bg-dark text-light flex flex-column align-items-start justify-content-start">
     <h2 class="nav-brand p-3">simpleblog</h2>
 
     <ul class="nav flex-column">
