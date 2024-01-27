@@ -37,12 +37,12 @@ $profile_id = $_SESSION["profile"]["id"];
         <form action="profile.dashboard.php" method="post" autocomplete="off">
             <h2>Ganti Kata Sandi</h2>
             <div class="form-group">
-                <label class="form-label" for="name">Nama Kategori</label>
+                <label class="form-label" for="name">Kata sandi baru</label>
                 <input class="form-control form-control-sm" type="password" autocomplete="off" name="password" id="password" placeholder="Masukan kata sandi" required="required" />
             </div>
 
             <div class="form-group">
-                <label class="form-label" for="confirm_password">Konfirmasi kata sandi</label>
+                <label class="form-label" for="confirm_password">Konfirmasi kata sandi baru</label>
                 <input class="form-control form-control-sm" type="password" autocomplete="off" confirm_password="confirm_password" id="confirm_password" placeholder="Konfirmasi kata sandi" required="required" />
             </div>
 
