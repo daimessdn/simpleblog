@@ -147,6 +147,8 @@ if (!isset($_SESSION["token"])) {
             </ul>
         </nav>
 
+        <hr>
+
         <form action="posts.dashboard.php" method="post" autocomplete="off">
             <h2>Tulis blog</h2>
             <div class="form-group">

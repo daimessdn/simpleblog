@@ -142,6 +142,8 @@ if (!isset($_SESSION["token"])) {
         </nav>
 
         <?php if ($user_model->is_administrator($_SESSION["profile"]["id"])) : ?>
+            <hr>
+
             <form action="users.dashboard.php" method="post" autocomplete="off">
                 <h2>Tambah user</h2>
                 <div class="form-group">

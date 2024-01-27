@@ -118,6 +118,8 @@ if (!isset($_SESSION["token"])) {
         </nav>
 
         <?php if ($user_model->is_administrator($_SESSION["profile"]["id"])) : ?>
+            <hr>
+
             <form action="categories.dashboard.php" method="post" autocomplete="off">
                 <h2>Tambah Kategori</h2>
                 <div class="form-group">
