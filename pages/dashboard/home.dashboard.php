@@ -20,7 +20,7 @@ $totals = [
 ];
 ?>
 <main class="py-3">
-    <div class="container mx-auto">
+    <div class="container mx-auto w-75">
         <?php if (isset($_SESSION["message"])) {
             generate_message("success", $_SESSION["message"]);
             unset($_SESSION["message"]);

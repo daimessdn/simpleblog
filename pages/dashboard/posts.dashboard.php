@@ -14,7 +14,7 @@ if (!isset($_SESSION["token"])) {
 ?>
 
 <main class="py-3">
-    <div class="container mx-auto">
+    <div class="container mx-auto w-75">
         <?php
         if (isset($_POST["add_posts"])) {
             $title = $_POST["title"];

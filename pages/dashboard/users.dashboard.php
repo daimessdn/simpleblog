@@ -9,12 +9,12 @@ require_once("../../includes/dashboard/nav.includes.php");
 
 if (!isset($_SESSION["token"])) {
     $_SESSION["message"] = "Anda harus login dulu untuk mengakses <em>dashboard</em>.";
-    
+
     echo "<script>window.location.href = '../auth/login.php';</script>";
 }
 ?>
 <main class="py-3">
-    <div class="container mx-auto">
+    <div class="container mx-auto w-75">
         <?php
         if (isset($_POST["add_user"])) {
             $name = $_POST["name"];

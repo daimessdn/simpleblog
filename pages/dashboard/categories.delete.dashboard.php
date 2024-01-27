@@ -13,7 +13,7 @@ if (!isset($_SESSION["token"])) {
 }
 ?>
 <main class="py-3">
-    <div class="container mx-auto">
+    <div class="container mx-auto w-75">
         <?php
         // get category based on id
         if (isset($_GET["id"])) {

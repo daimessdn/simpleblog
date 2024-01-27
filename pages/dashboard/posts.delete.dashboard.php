@@ -13,14 +13,14 @@ if (!isset($_SESSION["token"])) {
 }
 ?>
 <main class="py-3">
-    <div class="container mx-auto">
+    <div class="container mx-auto w-75">
         <?php
         // get post based on id
         if (isset($_GET["id"])) {
             $post_id = $_GET["id"];
 
             $post = $post_model->select_all(["id" => $post_id]);
-            
+
             if (sizeof($post) > 0) {
                 $title = $post[0]["title"];
                 $post_model->delete(["id" => $post_id]);

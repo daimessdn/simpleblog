@@ -13,7 +13,7 @@ if (!isset($_SESSION["token"])) {
 }
 ?>
 <main class="py-3">
-    <div class="container mx-auto">
+    <div class="container mx-auto w-75">
         <?php
         // get user based on id
         if (isset($_GET["id"])) {
@@ -27,7 +27,7 @@ if (!isset($_SESSION["token"])) {
 
                 $user_model->delete(["id" => $user_id]);
                 echo "<script>window.location.href = 'users.dashboard.php';</script>";
-        } else {
+            } else {
                 http_response_code(404);
 
                 echo "User tidak ditemukan";

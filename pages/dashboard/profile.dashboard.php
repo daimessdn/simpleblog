@@ -15,7 +15,7 @@ if (!isset($_SESSION["token"])) {
 $profile_id = $_SESSION["profile"]["id"];
 ?>
 <main class="py-3">
-    <div class="container mx-auto">
+    <div class="container mx-auto w-75">
         <?php
         // get post based on id
         $user = $user_model->select_all(["id" => $profile_id])[0];

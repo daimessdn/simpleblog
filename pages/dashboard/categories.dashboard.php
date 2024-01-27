@@ -13,7 +13,7 @@ if (!isset($_SESSION["token"])) {
 }
 ?>
 <main class="py-3">
-    <div class="container mx-auto">
+    <div class="container mx-auto w-75">
         <?php
         if (isset($_POST["add_category"])) {
             $name = $_POST["name"];
@@ -31,7 +31,7 @@ if (!isset($_SESSION["token"])) {
             generate_message("success", $_SESSION["message"]);
             unset($_SESSION["message"]);
         } ?>
-        
+
         <?php
         if (isset($_GET["page"])) {
             $page = $_GET["page"];
