@@ -10,9 +10,11 @@
             <a href="posts.dashboard.php" class="nav-link text-light">Posts</a>
         </li>
 
-        <li class="nav-item">
-            <a href="categories.dashboard.php" class="nav-link text-light">Categories</a>
-        </li>
+        <?php if ($user_model->is_administrator($_SESSION["profile"]["id"])) : ?>
+            <li class="nav-item">
+                <a href="categories.dashboard.php" class="nav-link text-light">Categories</a>
+            </li>
+        <?php endif; ?>
 
         <li class="nav-item">
             <a href="users.dashboard.php" class="nav-link text-light">Users</a>

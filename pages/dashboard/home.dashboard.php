@@ -30,20 +30,22 @@ $totals = [
         <h1 class="mb-4">Dashboard</h1>
 
         <div class="row row-cols-2">
-            <div class="col">
-                <div class="card border-primary mb-3">
-                    <div class="card-body">
-                        <h2>
-                            <i class="fa-solid fa-users"></i> Kelola User
-                        </h2>
+            <?php if ($user_model->is_administrator($_SESSION["profile"]["id"])) : ?>
+                <div class="col">
+                    <div class="card border-primary mb-3">
+                        <div class="card-body">
+                            <h2>
+                                <i class="fa-solid fa-users"></i> Kelola User
+                            </h2>
 
-                        <p class="mb-0">
-                            Terdapat <?= strval($totals["users"]) ?> user yang
-                            dibuat dengan <em>role</em> administrator dan kontributor.
-                        </p>
+                            <p class="mb-0">
+                                Terdapat <?= strval($totals["users"]) ?> user yang
+                                dibuat dengan <em>role</em> administrator dan kontributor.
+                            </p>
+                        </div>
                     </div>
                 </div>
-            </div>
+            <?php endif; ?>
 
             <div class="col">
                 <div class="card border-primary mb-3">
@@ -61,19 +63,21 @@ $totals = [
                 </div>
             </div>
 
-            <div class="col">
-                <div class="card border-primary mb-3">
-                    <div class="card-body">
-                        <h2>
-                            <i class="fa-solid fa-tag"></i> Kelola kategori
-                        </h2>
+            <?php if ($user_model->is_administrator($_SESSION["profile"]["id"])) : ?>
+                <div class="col">
+                    <div class="card border-primary mb-3">
+                        <div class="card-body">
+                            <h2>
+                                <i class="fa-solid fa-tag"></i> Kelola kategori
+                            </h2>
 
-                        <p class="mb-0">
-                            Terdapat <?= strval($totals["categories"]) ?> kategori yang dibuat.
-                        </p>
+                            <p class="mb-0">
+                                Terdapat <?= strval($totals["categories"]) ?> kategori yang dibuat.
+                            </p>
+                        </div>
                     </div>
                 </div>
-            </div>
+            <?php endif; ?>
         </div>
 
         <?php if ($totals["drafts"] > 0) : ?>
