@@ -30,7 +30,7 @@ if (!isset($_SESSION["token"])) {
                 "updated_at" => date("Y-m-d H:i:s"),
             ]);
 
-            header("location:categories.dashboard.php");
+            echo "<script>window.location.href = 'categories.dashboard.php';</script>";
         }
         ?>
 

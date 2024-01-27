@@ -47,7 +47,7 @@ if (!isset($_SESSION["token"])) {
                 "status" => 0,
             ]);
 
-            header("location:posts.dashboard.php");
+            echo "<script>window.location.href = 'posts.dashboard.php';</script>";
         }
         ?>
         <h1>Postingan</h1>

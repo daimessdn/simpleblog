@@ -14,12 +14,12 @@ if (!isset($_SESSION["token"])) {
 <main class="w-100 pt-2">
     <div class="container mx-auto">
         <?php
-        if (isset($_user["add_user"])) {
-            $name = $_user["name"];
-            $username = $_user["username"];
-            $email = $_user["email"];
-            $password = $_user["password"];
-            $role = $_user["role"];
+        if (isset($_POST["add_user"])) {
+            $name = $_POST["name"];
+            $username = $_POST["username"];
+            $email = $_POST["email"];
+            $password = $_POST["password"];
+            $role = $_POST["role"];
 
             $user_model->insert([
                 'name' => $name,
@@ -28,8 +28,6 @@ if (!isset($_SESSION["token"])) {
                 'email' => $email,
                 'password' => $password,
             ]);
-
-            echo "sukses tambah user $username";
         }
         ?>
 
@@ -135,7 +133,7 @@ if (!isset($_SESSION["token"])) {
         </nav>
 
         <?php if ($user_model->is_administrator($_SESSION["profile"]["id"])) : ?>
-            <form action="users.dashboard.php" method="user" autocomplete="off">
+            <form action="users.dashboard.php" method="post" autocomplete="off">
                 <h2>Tambah user</h2>
                 <div class="form-group">
                     <label class="form-label" for="name">Nama</label>

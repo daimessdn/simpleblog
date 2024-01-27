@@ -20,15 +20,14 @@ $profile_id = $_SESSION["profile"]["id"];
         $user = $user_model->select_all(["id" => $profile_id])[0];
 
         if (isset($_POST["change_password"])) {
-
             $new_password = $_POST["password"];
 
             $user_model->update(["id" => $profile_id], [
                 "password" => $new_password,
                 "updated_at" => date("Y-m-d H:i:s"),
             ]);
-
-            header("location:profile.dashboard.php");
+            echo "sukses ganti password";
+            echo "<script>window.location.href = 'profile.dashboard.php';</script>";
         }
         ?>
 
